@@ -10,8 +10,10 @@ function setup(){
 
     initAngel(AngelPosMode.middle);
     drawGrid();
+    randomAngelMove();
     drawEnt();
     noLoop();
+    
 }
 
 function draw(){
@@ -19,6 +21,10 @@ function draw(){
     drawObs();
     drawGrid();
     drawEnt();
+
+    if(lostcondition){
+        drawLost();
+    }
 }
 
 function drawGrid(){
@@ -48,17 +54,6 @@ function drawEnt(){
     var cy = (Angel.y * gridinfo.increment) + gridinfo.increment/2 +1;
     circle(cx, cy, gridinfo.increment-2);
 
-    //Angel UI
-    fill(color('lightgray'));
-   
-    for (var i in surround){
-        if(!checkRange(Angel.x + surround[i][0], Angel.y + surround[i][1])) continue;
-        if(includeSub(Filled, [Angel.x + surround[i][0], Angel.y + surround[i][1]])) continue;
-        
-        var x = ((Angel.x + surround[i][0]) * gridinfo.increment) + gridinfo.increment/2 + 1;
-        var y = ((Angel.y + surround[i][1]) * gridinfo.increment) + gridinfo.increment/2 + 1;
-        circle(x, y, gridinfo.increment/3);
-    }
 
     
     pop();
@@ -72,5 +67,14 @@ function drawObs(){
         rect(gridinfo.increment * Filled[i][0] , gridinfo.increment * Filled[i][1],
          gridinfo.increment, gridinfo.increment);
     }
+    pop();
+}
+
+function drawLost(){
+    push();
+    textSize(CANVSIZEX/10);
+    fill(color('pink'));
+    textAlign(CENTER);
+    text('Angel Trapped', CANVSIZEX/2,CANVSIZEY/2);
     pop();
 }
