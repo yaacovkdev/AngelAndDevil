@@ -24,11 +24,15 @@ function mouseBound(x,y){
 function moveCondition(x,y){
     if(x == Angel.x && y == Angel.y) return false;
     if(Math.abs(x-Angel.x) > 1 || Math.abs(y-Angel.y) > 1) return false;
+    if(includeSub(Filled, [x,y])) return false;
     return true;
 }
 
 function fillRandomGrid(){
     var x = int(Math.random() * gridinfo.grids);
     var y = int(Math.random() * gridinfo.grids);
+    //x += Offset.x;
+    //y += Offset.y;
+    if(includeSub(Filled, [x,y])) return;
     Filled.push([x,y]);
 }
