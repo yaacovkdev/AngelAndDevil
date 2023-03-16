@@ -19,7 +19,6 @@ function draw(){
     drawObs();
     drawGrid();
     drawEnt();
-    console.log(Filled, Angel.x, Angel.y);
 }
 
 function drawGrid(){
@@ -74,5 +73,4 @@ function drawObs(){
          gridinfo.increment, gridinfo.increment);
     }
     pop();
-    console.log(Filled);
 }

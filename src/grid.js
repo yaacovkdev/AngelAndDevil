@@ -1,5 +1,5 @@
 //default canvas size
-let CANVSIZEX = 960, CANVSIZEY = 960, MENU = 0;
+let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 600;
 
 let gridinfo = {
     size: 2,
@@ -7,8 +7,8 @@ let gridinfo = {
     increment: 0,
 };
 
-let surround = [[-1,1], [0,1], [1,1],
-                [-1,0],      , [1,0],
+let surround = [[-1,1] ,[0, 1],[1,1],
+                [-1,0] ,      ,[1,0],
                 [-1,-1],[0,-1],[1,-1]];
 
 //CANVSIZEX and CANVSIZEY may have been altered during setup stage in render.js
@@ -33,10 +33,10 @@ function checkRange(x,y){
 }
 
 function sizeMode(){
-    if(windowWidth < 960*1.25 || windowHeight < 960*1.25){
-        CANVSIZEX = 800, CANVSIZEY = 800;
+    if(windowWidth < MINIMUM*1.25 || windowHeight < MINIMUM*1.25){
+        CANVSIZEX = MINIMUM, CANVSIZEY = MINIMUM;
     } else {
-        CANVSIZEX = Math.min(windowWidth, windowHeight)-250;
+        CANVSIZEX = Math.min(windowWidth, windowHeight)-150;
         CANVSIZEY = CANVSIZEX;
     }
 }

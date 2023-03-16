@@ -5,8 +5,7 @@ function includeSub(Arr, valuearr){
             if(Arr[i][j] != valuearr[j]) {
                 checker = false;
                 break;
-            }
-            
+            }   
         }
         if(checker) return true;
     }
