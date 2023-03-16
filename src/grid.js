@@ -36,7 +36,7 @@ function sizeMode(){
     if(windowWidth < MINIMUM*1.25 || windowHeight < MINIMUM*1.25){
         CANVSIZEX = MINIMUM, CANVSIZEY = MINIMUM;
     } else {
-        CANVSIZEX = Math.min(windowWidth, windowHeight)-150;
+        CANVSIZEX = Math.min(windowWidth, windowHeight)-200;
         CANVSIZEY = CANVSIZEX;
     }
 }

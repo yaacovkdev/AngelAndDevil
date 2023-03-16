@@ -4,7 +4,7 @@ function setup(){
     initGrid();
     Canv = createCanvas(CANVSIZEX, CANVSIZEY+MENU);
     Canv.parent("canvdiv0");
-    Canv.style("padding: 0; margin: auto; display:block; position:absolute; top: 0; bottom: 0; left: 0; right: 0;")
+    Canv.style("display:block; position:absolute; left: 0; right: 0; margin: auto; ")
     background(240);
     smooth();
 

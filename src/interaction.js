@@ -57,3 +57,7 @@ function fillRandomGrid(){
         Filled.push([x,y]);
     }
 }
+
+function interactFill(){
+    
+}
