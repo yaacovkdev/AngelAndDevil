@@ -3,13 +3,9 @@ let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 600;
 
 let gridinfo = {
     size: 2,
-    grids: 25,
+    grids: 4,
     increment: 0,
 };
-
-let surround = [[-1,1] ,[0, 1],[1,1],
-                [-1,0]       ,[1,0],
-                [-1,-1],[0,-1],[1,-1]];
 
 //CANVSIZEX and CANVSIZEY may have been altered during setup stage in render.js
 function initGrid(){

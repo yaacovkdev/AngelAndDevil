@@ -10,7 +10,7 @@ function setup(){
 
     initAngel(AngelPosMode.middle);
     drawGrid();
-    randomAngelMove();
+    basicSearchMove();
     drawEnt();
     noLoop();
     
