@@ -22,3 +22,12 @@ function arrayEqual(A, B){
     }
     return true;
 }
+
+function indexOfTuple(Arr, tuple){
+    for(var i  = 0; i < Arr.length; i++){
+        if(Arr[i][0] == tuple[0] &&Arr[i][1] == tuple[1]){
+            return i;
+        }
+    }
+    return -1;
+}

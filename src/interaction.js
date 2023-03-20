@@ -5,7 +5,7 @@ function mousePressed(){
     
     var gridpos = toPos(mouseX, mouseY);
 
-    if(!isObstacle(gridpos.x, gridpos.y)) return;
+    if(!isClear(gridpos.x, gridpos.y)) return;
     
     //change it's location
     Filled.push([gridpos.x, gridpos.y]);
@@ -26,7 +26,7 @@ function inField(x,y){
     return true;
 }
 
-function isObstacle(x,y){
+function isClear(x,y){
     if(x == Angel.x && y == Angel.y) return false;
     if(includeSub(Filled, [x,y])) return false;
     return true;
