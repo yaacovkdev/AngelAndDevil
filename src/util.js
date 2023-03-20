@@ -11,3 +11,14 @@ function includeSub(Arr, valuearr){
     }
     return false;
 }
+
+function arrayEqual(A, B){
+    if(A == null || B == null) return false;
+    if(A.length != B.length) return false;
+    for(var i in A){
+        if(A[i] != B[i]){
+            return false;
+        }
+    }
+    return true;
+}
