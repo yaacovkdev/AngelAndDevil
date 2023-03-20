@@ -9,7 +9,7 @@ function mousePressed(){
     
     //change it's location
     Filled.push([gridpos.x, gridpos.y]);
-    basicSearchMove();
+    angelDepthFirst();
     redraw();
 }
 
