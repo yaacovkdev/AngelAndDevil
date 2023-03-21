@@ -7,9 +7,12 @@ function setup(){
     Canv.style("display:block; position:absolute; left: 0; right: 0; margin: auto; ")
     background(240);
     smooth();
-
+    print('hello back', Angel);
     initAngel(AngelPosMode.middle);
+    print('hello',Angel);
     drawGrid();
+    print('hello',Angel);
+    
     angelDepthFirst();
     drawEnt();
     noLoop();
@@ -19,7 +22,7 @@ function setup(){
 function draw(){
     background(240);
     drawObs();
-    drawDebug();
+    //drawDebug();
     drawGrid();
     drawEnt();
 

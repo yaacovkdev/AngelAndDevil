@@ -22,9 +22,15 @@ function toPos(x, y){
 }
 
 function checkRange(x,y){
-    if (x >= gridinfo.grids || x < 0 || y >= gridinfo.grids || y < 0){
+    if (x > gridinfo.grids-1 || x < 0 || y > gridinfo.grids-1 || y < 0){
         return false;
     }
+    return true;
+}
+
+function isClear(x,y){
+    if(x == Angel.x && y == Angel.y) return false;
+    if(includeSub(Filled, [x,y])) return false;
     return true;
 }
 

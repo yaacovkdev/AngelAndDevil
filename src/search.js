@@ -32,7 +32,7 @@ function orderedSearchMove(){
 }
 
 function basicSearchMove(){
-    var testgoal = [Angel.x,0];
+    var testgoal = [int(gridinfo.grids/2),0];
     var direction = [0,0];
 
     
@@ -46,63 +46,68 @@ function basicSearchMove(){
     Angel.y += direction[1];
 }
 
-//still broken
-let StackGrids = [];
+
 
 function angelDepthFirst(){
-    var testgoal = [Angel.x,0];
-    var start = [Angel.x, Angel.y];
+    var testgoal = [int(gridinfo.grids/2), 0];
+
     if(arrayEqual(angelFindCirc(surround[0],0),[0,0])){
         lostcondition = true;
         return;
     }
-    var searchStack = [start];
 
     //grid matrix of unvisited cells
     var Visited = Array(gridinfo.grids).fill(Array(gridinfo.grids).fill(false));
-    
-    //popping does not work as intended
+    var stackMemo = [[Angel.x, Angel.y]];
+    print(stackMemo);
+
+    //the first direction
+    var bestdirection = [0,0];
+
+    //you only need to get the direction from this code
     var breakloop = false;
-    while(searchStack.length != 0 && !breakloop){
-        var last = searchStack.pop();
-        print('last',last);
-        if(!Visited[last[0]][last[1]]){
-            Visited[last[0]][last[1]] = true;
-            for(var i in surround){
-                var potentialmove = [last[0] + surround[i][0], last[1] + surround[i][1]];
+    while(stackMemo.length != 0 && !breakloop){
+        var u = stackMemo.pop();
+        if(!Visited[u[0]][u[1]]){
+            Visited[u[0]][u[1]] = true;
 
-                //if we reach our goal then break the loop and start moving!
+            //all 8 directions
+            for(var i = 0; i < 8; i++){
+                var potentialmove = [u[0] + surround[i][0], u[1] + surround[i][1]];
                 
-                if(inField(potentialmove[0], potentialmove[1]) && isClear(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
-                    searchStack.push(potentialmove);
-                    StackGrids.push(potentialmove);
-                    if(arrayEqual(potentialmove, testgoal)){
-                        
-                        breakloop = true;
-                        break;
-                    }
-                    
-                    
+                if(arrayEqual(potentialmove, testgoal)){
+                    breakloop = true;
+                    break;
                 }
-                
+                console.log(potentialmove);
+                if(isClear(potentialmove[0], potentialmove[1]) && checkRange(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
+                    var surrindex = isAdjacentCell([Angel.x, Angel.y],potentialmove);
+                    if(surrindex != -1){
+                        bestdirection[0] = surround[surrindex][0];
+                        bestdirection[1] = surround[surrindex][1];
+                    }
+                    stackMemo.push(potentialmove);
+                }
             }
-        }   
+        }
     }
-    if(searchStack.length == 0){
-        orderedSearchMove();
-        return;
-    }
-    print(searchStack);
-    Angel.x += searchStack[0][0];
-    Angel.y += searchStack[0][1];
-}
 
+    if(arrayEqual(bestdirection,[0,0])){
+        //lostcondition = true;
+        //return;
+        console.log('location blocked');
+    }
+
+    Angel.x += bestdirection[0];
+    Angel.y += bestdirection[1];
+    print('bestdirection', bestdirection);
+}
 
 //searches for avalible paths in a circular order
 function angelFindCirc(direction, i){
     
     var count = 0;
-    while(!inField(Angel.x + direction[0], Angel.y + direction[1]) || 
+    while(!checkRange(Angel.x + direction[0], Angel.y + direction[1]) || 
     !isClear(Angel.x + direction[0], Angel.y + direction[1])){
         i++;
         if(i == 8) i = 0;
@@ -111,9 +116,9 @@ function angelFindCirc(direction, i){
         }
         direction = surround[i];
         count++;
-        print('debug', direction);
+    
     }
-    print('end debug, count:', count, Filled);
+    
     return direction;
 }
 
@@ -133,10 +138,19 @@ function angelFindClosest(direction, goal){
             if(x > 1) x -=3;
             if(y > 1) y -= 3;
             if(x == 0 && y == 0) continue;
-            if(isClear(Angel.x + x, Angel.y + y) && inField(Angel.x + x, Angel.y + y)){
+            if(isClear(Angel.x + x, Angel.y + y) && checkRange(Angel.x + x, Angel.y + y)){
                 return [x,y];
             }
         }
     }
     return [0,0];
+}
+
+function isAdjacentCell(pos, target){
+    for(var i in surround){
+        if(arrayEqual([pos[0] + surround[i][0], pos[1] + surround[i][1]], target)){
+            return i;
+        }
+    }
+    return -1;
 }
