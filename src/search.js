@@ -92,6 +92,7 @@ function angelDepthFirst(){
         }
     }
 
+    //this will run when the stack gets popped to 0
     if(arrayEqual(bestdirection,[0,0])){
         //lostcondition = true;
         //return;
