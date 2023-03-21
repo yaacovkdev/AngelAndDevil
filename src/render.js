@@ -19,6 +19,7 @@ function setup(){
 function draw(){
     background(240);
     drawObs();
+    drawDebug();
     drawGrid();
     drawEnt();
 
@@ -65,6 +66,17 @@ function drawObs(){
     fill(color('red'));
     for(var i in Filled){
         rect(gridinfo.increment * Filled[i][0] , gridinfo.increment * Filled[i][1],
+         gridinfo.increment, gridinfo.increment);
+    }
+    pop();
+}
+
+function drawDebug(){
+    push();
+    noStroke();
+    fill(color('rgba(255,255,0,0.3)'));
+    for(var i in StackGrids){
+        rect(gridinfo.increment * StackGrids[i][0] , gridinfo.increment * StackGrids[i][1],
          gridinfo.increment, gridinfo.increment);
     }
     pop();

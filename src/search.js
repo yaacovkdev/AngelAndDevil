@@ -47,6 +47,8 @@ function basicSearchMove(){
 }
 
 //still broken
+let StackGrids = [];
+
 function angelDepthFirst(){
     var testgoal = [Angel.x,0];
     var start = [Angel.x, Angel.y];
@@ -56,12 +58,14 @@ function angelDepthFirst(){
     }
     var searchStack = [start];
 
+    //grid matrix of unvisited cells
     var Visited = Array(gridinfo.grids).fill(Array(gridinfo.grids).fill(false));
     
-
+    //popping does not work as intended
     var breakloop = false;
     while(searchStack.length != 0 && !breakloop){
         var last = searchStack.pop();
+        print('last',last);
         if(!Visited[last[0]][last[1]]){
             Visited[last[0]][last[1]] = true;
             for(var i in surround){
@@ -69,15 +73,15 @@ function angelDepthFirst(){
 
                 //if we reach our goal then break the loop and start moving!
                 
-                
-                
                 if(inField(potentialmove[0], potentialmove[1]) && isClear(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
+                    searchStack.push(potentialmove);
+                    StackGrids.push(potentialmove);
                     if(arrayEqual(potentialmove, testgoal)){
-                        searchStack.push(potentialmove);
+                        
                         breakloop = true;
                         break;
                     }
-                    searchStack.push(potentialmove);
+                    
                     
                 }
                 
