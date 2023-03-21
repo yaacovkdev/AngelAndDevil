@@ -3,7 +3,7 @@ let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 600;
 
 let gridinfo = {
     size: 2,
-    grids: 5,
+    grids: 50,
     increment: 0,
 };
 

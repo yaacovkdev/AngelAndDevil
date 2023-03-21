@@ -46,8 +46,7 @@ function basicSearchMove(){
     Angel.y += direction[1];
 }
 
-
-
+//Wacky search
 function angelDepthFirst(){
     var testgoal = [int(gridinfo.grids/2), 0];
 
@@ -59,7 +58,12 @@ function angelDepthFirst(){
     //grid matrix of unvisited cells
     var Visited = Array(gridinfo.grids).fill(Array(gridinfo.grids).fill(false));
     var stackMemo = [[Angel.x, Angel.y]];
-    print(stackMemo);
+    
+    for(var i in Visited){
+        for(var j in Visited[i]){
+            print(Visited[i][j]);
+        }
+    }
 
     //the first direction
     var bestdirection = [0,0];
@@ -67,21 +71,24 @@ function angelDepthFirst(){
     //you only need to get the direction from this code
     var breakloop = false;
     while(stackMemo.length != 0 && !breakloop){
+        //var u = stackMemo[stackMemo.length-1];
         var u = stackMemo.pop();
         if(!Visited[u[0]][u[1]]){
             Visited[u[0]][u[1]] = true;
 
-            //all 8 directions
+            //all 8 directions but they don't reset
             for(var i = 0; i < 8; i++){
                 var potentialmove = [u[0] + surround[i][0], u[1] + surround[i][1]];
                 
                 if(arrayEqual(potentialmove, testgoal)){
+                    console.log('path found');
                     breakloop = true;
                     break;
                 }
-                console.log(potentialmove);
+                //console.log(potentialmove);
                 if(isClear(potentialmove[0], potentialmove[1]) && checkRange(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
                     var surrindex = isAdjacentCell([Angel.x, Angel.y],potentialmove);
+                    print('so?');
                     if(surrindex != -1){
                         bestdirection[0] = surround[surrindex][0];
                         bestdirection[1] = surround[surrindex][1];
@@ -89,6 +96,11 @@ function angelDepthFirst(){
                     stackMemo.push(potentialmove);
                 }
             }
+        }
+    }
+    for(var i in Visited){
+        for(var j in Visited[i]){
+            print(Visited[i][j]);
         }
     }
 
