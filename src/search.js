@@ -46,7 +46,7 @@ function basicSearchMove(){
     Angel.y += direction[1];
 }
 
-//Wacky search
+//TODO: Shortest Path DFS
 function angelDepthFirst(){
     var testgoal = [int(gridinfo.grids/2), 0];
 
@@ -67,11 +67,6 @@ function angelDepthFirst(){
 
     var stackMemo = [[Angel.x, Angel.y]];
     
-    for(var i in Visited){
-        for(var j in Visited[i]){
-            print(Visited[i][j]);
-        }
-    }
 
     //the first direction
     var bestdirection = [0,0];
@@ -83,14 +78,12 @@ function angelDepthFirst(){
         var u = stackMemo.pop();
         if(!Visited[u[0]][u[1]]){
             Visited[u[0]][u[1]] = true;
-            print('filled vis', Visited[u[0]][u[1]]);
+           
             if(arrayEqual(u, testgoal)){
                 console.log('path found');
                 breakloop = true;
                 break;
             }
-            
-            
             
             //all 8 directions but they don't reset
             for(var i = 0; i < 8; i++){
@@ -100,7 +93,7 @@ function angelDepthFirst(){
                 //console.log(potentialmove);
                 if(isClear(potentialmove[0], potentialmove[1]) && checkRange(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
                     var surrindex = isAdjacentCell([Angel.x, Angel.y],potentialmove);
-                    console.log(surrindex);
+                    
                     if(surrindex != -1){
                         bestdirection[0] = surround[surrindex][0];
                         bestdirection[1] = surround[surrindex][1];
@@ -110,24 +103,22 @@ function angelDepthFirst(){
 
             }
         }
-        print(stackMemo.length);
+        
     }
-    for(var i in Visited){
-        for(var j in Visited[i]){
-            print(Visited[i][j]);
-        }
-    }
+    
 
     //this will run when the stack gets popped to 0
     if(arrayEqual(bestdirection,[0,0])){
         //lostcondition = true;
         //return;
+
+        //this will not likely print now because even if the path is unreachable the algorithm still takes in direciton
+        //won't be the case in a successful shortest path DFS
         console.log('location blocked');
     }
 
     Angel.x += bestdirection[0];
     Angel.y += bestdirection[1];
-    print('bestdirection', bestdirection);
 }
 
 //searches for avalible paths in a circular order
