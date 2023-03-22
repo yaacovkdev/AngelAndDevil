@@ -56,7 +56,15 @@ function angelDepthFirst(){
     }
 
     //grid matrix of unvisited cells
-    var Visited = Array(gridinfo.grids).fill(Array(gridinfo.grids).fill(false));
+    var Visited = [];
+    for (var i = 0; i < gridinfo.grids; i++){
+        var sub = [];
+        for(var j = 0; j < gridinfo.grids; j++){
+            sub.push(false);
+        }
+        Visited.push(sub);
+    }
+
     var stackMemo = [[Angel.x, Angel.y]];
     
     for(var i in Visited){
@@ -75,30 +83,31 @@ function angelDepthFirst(){
         var u = stackMemo.pop();
         if(!Visited[u[0]][u[1]]){
             Visited[u[0]][u[1]] = true;
-
+            print('filled vis', Visited[u[0]][u[1]]);
             if(arrayEqual(u, testgoal)){
                 console.log('path found');
                 breakloop = true;
                 break;
             }
-
+            
             
             
             //all 8 directions but they don't reset
             for(var i = 0; i < 8; i++){
                 var potentialmove = [u[0] + surround[i][0], u[1] + surround[i][1]];
-                
+                //console.log(potentialmove, Angel, Visited[potentialmove[0]][potentialmove[1]]);
                 
                 //console.log(potentialmove);
                 if(isClear(potentialmove[0], potentialmove[1]) && checkRange(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
                     var surrindex = isAdjacentCell([Angel.x, Angel.y],potentialmove);
-                    
+                    console.log(surrindex);
                     if(surrindex != -1){
                         bestdirection[0] = surround[surrindex][0];
                         bestdirection[1] = surround[surrindex][1];
                     }
                     stackMemo.push(potentialmove);
                 }
+
             }
         }
         print(stackMemo.length);
