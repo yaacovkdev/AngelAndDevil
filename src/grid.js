@@ -3,7 +3,7 @@ let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 600;
 
 let gridinfo = {
     size: 2,
-    grids: 15,
+    grids: 21,
     increment: 0,
 };
 
@@ -32,6 +32,16 @@ function isClear(x,y){
     if(x == Angel.x && y == Angel.y) return false;
     if(includeSub(Filled, [x,y])) return false;
     return true;
+}
+
+function inPerimiter(pos){
+    for(var i = 0; i < gridinfo.grids-1; i++){
+        if(arrayEqual(pos, [i,0]) || arrayEqual(pos, [i,gridinfo.grids-1]) 
+        || arrayEqual(pos, [0,i]) || arrayEqual(pos, [gridinfo.grids-1,i])){
+            return true;
+        }
+    }
+    return false;
 }
 
 function sizeMode(){

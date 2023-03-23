@@ -7,12 +7,7 @@ let surround_adjacent_index = [0,1,2,4,7,6,5,3];
 
 function randomAngelMove(){
     var i = int(Math.random() * 8);
-    
     var direction = angelFindCirc(surround[i], i);
-    if(arrayEqual(direction, [0,0])){
-        lostcondition = true;
-        return;
-    }
     
     Angel.x += direction[0];
     Angel.y += direction[1];
@@ -20,12 +15,7 @@ function randomAngelMove(){
 
 function orderedSearchMove(){
     var i = 1;
-    
     var direction = angelFindCirc(surround[i], i);
-    if(arrayEqual(direction, [0,0])){
-        lostcondition = true;
-        return;
-    }
     
     Angel.x += direction[0];
     Angel.y += direction[1];
@@ -48,12 +38,6 @@ function basicSearchMove(){
 
 //TODO: Shortest Path DFS
 function angelDepthFirst(){
-    var testgoal = [int(gridinfo.grids/2), 0];
-
-    if(arrayEqual(angelFindCirc(surround[0],0),[0,0])){
-        lostcondition = true;
-        return;
-    }
 
     //grid matrix of unvisited cells
     var Visited = [];
@@ -71,19 +55,25 @@ function angelDepthFirst(){
     //the first direction
     var bestdirection = [0,0];
 
+    var loopbreak = false;
     //you only need to get the direction from this code
-
-    while(stackMemo.length != 0 ){
+    while(stackMemo.length != 0 && !loopbreak){
         //var u = stackMemo[stackMemo.length-1];
         var u = stackMemo.pop();
+        
         if(!Visited[u[0]][u[1]]){
             Visited[u[0]][u[1]] = true;
            
-            if(arrayEqual(u, testgoal)){
-                console.log('path found');
-                breakloop = true;
-                break;
+            //perimeter escape
+            for(var i = 0; i < gridinfo.grids-1; i++){
+                if(arrayEqual(u, [i,0]) || arrayEqual(u, [i,gridinfo.grids-1]) 
+                || arrayEqual(u, [0,i]) || arrayEqual(u, [gridinfo.grids-1,i])){
+                    console.log('path found');
+                    loopbreak = true;
+                    break;
+                }
             }
+            
             
             //all 8 directions but they don't reset
             for(var i = 0; i < 8; i++){
@@ -108,13 +98,14 @@ function angelDepthFirst(){
     
 
     //this will run when the stack gets popped to 0
-    if(arrayEqual(bestdirection,[0,0])){
+    if(!loopbreak){
         //lostcondition = true;
         //return;
 
         //this will not likely print now because even if the path is unreachable the algorithm still takes in direciton
         //won't be the case in a successful shortest path DFS
         console.log('location blocked');
+
     }
 
     Angel.x += bestdirection[0];
@@ -123,7 +114,6 @@ function angelDepthFirst(){
 
 //searches for avalible paths in a circular order
 function angelFindCirc(direction, i){
-    
     var count = 0;
     while(!checkRange(Angel.x + direction[0], Angel.y + direction[1]) || 
     !isClear(Angel.x + direction[0], Angel.y + direction[1])){
@@ -171,4 +161,17 @@ function isAdjacentCell(pos, target){
         }
     }
     return -1;
+}
+
+function calcCondition(){
+    if(arrayEqual(angelFindCirc(surround[0],0),[0,0])){
+        lostcondition = true;
+        return;
+    }
+
+    if(inPerimiter([Angel.x, Angel.y])){
+        wincondition = true;
+        return;
+    }
+    
 }
