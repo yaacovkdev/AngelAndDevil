@@ -112,6 +112,81 @@ function angelDepthFirst(){
     Angel.y += bestdirection[1];
 }
 
+function angelBreadthFirst(){
+
+    //grid matrix of unvisited cells
+    var Visited = [];
+    for (var i = 0; i < gridinfo.grids; i++){
+        var sub = [];
+        for(var j = 0; j < gridinfo.grids; j++){
+            sub.push(false);
+        }
+        Visited.push(sub);
+    }
+
+    var stackMemo = [[Angel.x, Angel.y]];
+    
+
+    //the first direction
+    var bestdirection = [0,0];
+
+    var loopbreak = false;
+    //you only need to get the direction from this code
+    while(stackMemo.length != 0 && !loopbreak){
+        //var u = stackMemo[stackMemo.length-1];
+        var u = stackMemo.shift();
+        
+        if(!Visited[u[0]][u[1]]){
+            Visited[u[0]][u[1]] = true;
+           
+            //perimeter escape
+            for(var i = 0; i < gridinfo.grids-1; i++){
+                if(arrayEqual(u, [i,0]) || arrayEqual(u, [i,gridinfo.grids-1]) 
+                || arrayEqual(u, [0,i]) || arrayEqual(u, [gridinfo.grids-1,i])){
+                    console.log('path found');
+                    loopbreak = true;
+                    break;
+                }
+            }
+            
+            
+            //all 8 directions but they don't reset
+            for(var i = 0; i < 8; i++){
+                var potentialmove = [u[0] + surround[i][0], u[1] + surround[i][1]];
+                //console.log(potentialmove, Angel, Visited[potentialmove[0]][potentialmove[1]]);
+                
+                //console.log(potentialmove);
+                if(isClear(potentialmove[0], potentialmove[1]) && checkRange(potentialmove[0], potentialmove[1]) && !Visited[potentialmove[0]][potentialmove[1]]){
+                    var surrindex = isAdjacentCell([Angel.x, Angel.y],potentialmove);
+                    
+                    if(surrindex != -1){
+                        bestdirection[0] = surround[surrindex][0];
+                        bestdirection[1] = surround[surrindex][1];
+                    }
+                    stackMemo.push(potentialmove);
+                }
+
+            }
+        }
+        
+    }
+    
+
+    //this will run when the stack gets popped to 0
+    if(!loopbreak){
+        //lostcondition = true;
+        //return;
+
+        //this will not likely print now because even if the path is unreachable the algorithm still takes in direciton
+        //won't be the case in a successful shortest path DFS
+        console.log('location blocked');
+
+    }
+
+    Angel.x += bestdirection[0];
+    Angel.y += bestdirection[1];
+}
+
 //searches for avalible paths in a circular order
 function angelFindCirc(direction, i){
     var count = 0;

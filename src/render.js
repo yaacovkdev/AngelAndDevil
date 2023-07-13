@@ -11,7 +11,7 @@ function setup(){
     initAngel(AngelPosMode.middle);
     
     drawGrid();
-    angelDepthFirst();
+    angelBreadthFirst();
     drawEnt();
     noLoop();
 }
