@@ -10,15 +10,16 @@ function mousePressed(){
     //change it's location
 
     if(devilTurn){
-        Filled.push([gridpos.x-Offset.x, gridpos.y-Offset.y]);
+        Filled.push([gridpos.x, gridpos.y]);
     } else {
         modifyGlobal(gridpos.x, gridpos.y);
+        Offset.x = Angel.gx;
+        Offset.y = Angel.gy;
         //Angel.x = gridpos.x;
         //Angel.y = gridpos.y;
-        Offset.x -= (gridpos.x - Angel.x);
-        Offset.y -= (gridpos.y - Angel.y);
+        
     }
-    devilTurn = !devilTurn;
+    //devilTurn = !devilTurn;
     print("mouse pressed Offset:", Offset);
     redraw();
 }

@@ -21,7 +21,7 @@ let Devil = {
 }
 
 let Filled = [
-
+    [5,5]
 ];
 
 function modifyGlobal(x,y){
