@@ -59,8 +59,8 @@ function initAngel(mode){
             Angel.y = int(gridinfo.grids/2);
             Angel.gx = 0;
             Angel.gy = 0;
-            Offset.x = -int(gridinfo.grids/2);
-            Offset.y = -int(gridinfo.grids/2);
+            //Offset.x = -int(gridinfo.grids/2);
+            //Offset.y = -int(gridinfo.grids/2);
             break;
     }
 }
