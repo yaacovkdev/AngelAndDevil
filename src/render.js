@@ -19,7 +19,7 @@ function draw(){
     drawObs();
     drawGrid();
     drawEnt();
-    print(Filled, Offset, Angel);
+    print("Filled:", Filled, Offset, Angel);
 }
 
 function drawGrid(){
@@ -69,6 +69,8 @@ function drawObs(){
     push();
     noStroke();
     fill(color('red'));
+
+    print("drawObs", Offset);
     for(var i in Filled){
         rect(gridinfo.increment * (Filled[i][0] + Offset.x) , gridinfo.increment * (Filled[i][1] + Offset.y),
          gridinfo.increment, gridinfo.increment);
