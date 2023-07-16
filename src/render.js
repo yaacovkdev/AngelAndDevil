@@ -56,12 +56,11 @@ function drawEnt(){
         if(!checkRange(Angel.x + surround[i][0], Angel.y + surround[i][1])) continue;
         if(includeSub(Filled, [Angel.gx + surround[i][0], Angel.gy + surround[i][1]])) continue;
         
+        //draw around local position of the angel
         var x = ((Angel.x + surround[i][0]) * gridinfo.increment) + gridinfo.increment/2 + 1;
         var y = ((Angel.y + surround[i][1]) * gridinfo.increment) + gridinfo.increment/2 + 1;
         circle(x, y, gridinfo.increment/3);
     }
-
-    
     pop();
 }
 
@@ -69,9 +68,10 @@ function drawObs(){
     push();
     noStroke();
     fill(color('red'));
-
+    print("Offset: ",Offset,"Filled: ", Filled);
     for(var i in Filled){
-        rect(gridinfo.increment * (Filled[i][0] - Offset.x) , gridinfo.increment * (Filled[i][1] - Offset.y),
+        var localpos = toLocal(Filled[i][0], Filled[i][1]);
+        rect(gridinfo.increment * (localpos[0]+Offset.x) , gridinfo.increment * (localpos[1]+Offset.y),
          gridinfo.increment, gridinfo.increment);
     }
     pop();

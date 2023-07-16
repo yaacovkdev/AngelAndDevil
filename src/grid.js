@@ -25,6 +25,7 @@ function toPos(x, y){
     return {x,y};
 }
 
+//in the range of the board
 function checkRange(x,y){
     if (x >= gridinfo.grids || x < 0 || y >= gridinfo.grids || y < 0){
         return false;

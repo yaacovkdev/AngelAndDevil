@@ -21,10 +21,5 @@ let Devil = {
 }
 
 let Filled = [
-    [5,5]
+    [-5,5]
 ];
-
-function modifyGlobal(x,y){
-    Angel.gx += (x - Angel.x);
-    Angel.gy += (y - Angel.y);
-}
