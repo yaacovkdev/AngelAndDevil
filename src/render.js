@@ -19,7 +19,6 @@ function draw(){
     drawObs();
     drawGrid();
     drawEnt();
-    print("Filled:", Filled, Offset, Angel);
 }
 
 function drawGrid(){
@@ -54,11 +53,12 @@ function drawEnt(){
    
     for (var i in surround){
         if(!checkRange(Angel.x + surround[i][0], Angel.y + surround[i][1])) continue;
+        
         if(includeSub(Filled, [Angel.gx + surround[i][0], Angel.gy + surround[i][1]])) continue;
         
         //draw around local position of the angel
         var x = ((Angel.x + surround[i][0]) * gridinfo.increment) + gridinfo.increment/2 + 1;
-        var y = ((Angel.y + surround[i][1]) * gridinfo.increment) + gridinfo.increment/2 + 1;
+        var y = ((Angel.y - surround[i][1]) * gridinfo.increment) + gridinfo.increment/2 + 1;
         circle(x, y, gridinfo.increment/3);
     }
     pop();

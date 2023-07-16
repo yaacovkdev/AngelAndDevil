@@ -20,7 +20,6 @@ function mousePressed(){
         
     }
     //devilTurn = !devilTurn;
-    print("mouse pressed Offset:", Offset);
     redraw();
 }
 
@@ -40,7 +39,8 @@ function moveCondition(x,y){
     if((Math.abs(x-Angel.x) > 1 || Math.abs(y-Angel.y) > 1) && !devilTurn) return false;
     
     //if clicked on the devil locations
-    if(includeSub(Filled, [x,y])) return false;
+    //BROKEN
+    if(includeSub(Filled, [x-Offset.x, y-Offset.y])) return false;
 
     return true;
 }

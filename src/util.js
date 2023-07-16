@@ -24,3 +24,9 @@ function toLocal(x,y){
     //through vector arithmetic the formula for conversion is x_local = x + 10, y_local = 10 - y (y + 10 - 2y)
     return [x+centre,centre-y];
 }
+
+function toGlobal(x,y){
+    var centre = int(gridinfo.grids/2);
+
+    return [x-centre,centre-y];
+}
