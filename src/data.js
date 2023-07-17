@@ -20,6 +20,4 @@ let Devil = {
     gy: 0
 }
 
-let Filled = [
-    [-5,5]
-];
+let Filled = [];
