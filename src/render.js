@@ -68,10 +68,10 @@ function drawObs(){
     push();
     noStroke();
     fill(color('red'));
-    print("Offset: ",Offset,"Filled: ", Filled);
+    
     for(var i in Filled){
         var localpos = toLocal(Filled[i][0], Filled[i][1]);
-        rect(gridinfo.increment * (localpos[0]+Offset.x) , gridinfo.increment * (localpos[1]+Offset.y),
+        rect(gridinfo.increment * (localpos[0]-Offset.x) , gridinfo.increment * (localpos[1]+Offset.y),
          gridinfo.increment, gridinfo.increment);
     }
     pop();
