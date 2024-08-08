@@ -11,23 +11,21 @@ function setup(){
     initAngel(AngelPosMode.middle);
     
     drawGrid();
-    
-    
-    angelDepthFirst();
+    angelBreadthFirst();
     drawEnt();
     noLoop();
-    
 }
 
 function draw(){
     background(240);
     drawObs();
-    //drawDebug();
     drawGrid();
     drawEnt();
 
     if(lostcondition){
         drawLost();
+    } else if (wincondition){
+        drawWin();
     }
 }
 
@@ -74,22 +72,20 @@ function drawObs(){
     pop();
 }
 
-function drawDebug(){
-    push();
-    noStroke();
-    fill(color('rgba(255,255,0,0.3)'));
-    for(var i in StackGrids){
-        rect(gridinfo.increment * StackGrids[i][0] , gridinfo.increment * StackGrids[i][1],
-         gridinfo.increment, gridinfo.increment);
-    }
-    pop();
-}
-
 function drawLost(){
     push();
     textSize(CANVSIZEX/10);
     fill(color('pink'));
     textAlign(CENTER);
     text('Angel Trapped', CANVSIZEX/2,CANVSIZEY/2);
+    pop();
+}
+
+function drawWin(){
+    push();
+    textSize(CANVSIZEX/10);
+    fill(color('pink'));
+    textAlign(CENTER);
+    text('Angel Escaped', CANVSIZEX/2,CANVSIZEY/2);
     pop();
 }
