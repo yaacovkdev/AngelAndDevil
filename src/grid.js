@@ -1,5 +1,5 @@
 //default canvas size
-let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 600;
+let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 800;
 
 let gridinfo = {
     size: 2,
@@ -67,12 +67,12 @@ function initAngel(mode){
             Angel.gy = -int(gridinfo.grids/2);
             break;
         case AngelPosMode.middle:
-            Angel.x = int(gridinfo.grids/2);
-            Angel.y = int(gridinfo.grids/2);
+            Angel.x = int(gridinfo.grids/2 -1);
+            Angel.y = int(gridinfo.grids/2 -1);
             Angel.gx = 0;
             Angel.gy = 0;
-            Offset.x = -int(gridinfo.grids/2);
-            Offset.y = -int(gridinfo.grids/2);
+            Offset.x = -int(gridinfo.grids/2-1);
+            Offset.y = -int(gridinfo.grids/2-1);
             break;
     }
 }
