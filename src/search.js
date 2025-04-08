@@ -1,8 +1,6 @@
-let surround = [[-1,-1] ,[0, -1],[1,-1],
+const surround = [[-1,-1] ,[0, -1],[1,-1],
                 [-1,0]       ,[1,0],
                 [-1,1],[0,1],[1,1]];
-
-let surround_adjacent_index = [0,1,2,4,7,6,5,3];
 
 //find the next winning move for Angel
 function obviousMove() {
@@ -46,7 +44,6 @@ function basicSearchMove(){
     Angel.y += direction[1];
 }
 
-//TODO: Shortest Path DFS
 function angelDepthFirst(){
 
     //grid matrix of unvisited cells
@@ -109,11 +106,6 @@ function angelDepthFirst(){
     if(!loopbreak){
         //lostcondition = true;
         //return;
-
-        //this will not likely print now because even if the path is unreachable the algorithm still takes in direciton
-        //won't be the case in a successful shortest path DFS
-        console.log('location blocked');
-
     }
 
     Angel.x += bestdirection[0];
@@ -255,5 +247,4 @@ function calcCondition(){
         wincondition = true;
         return;
     }
-    
 }

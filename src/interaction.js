@@ -1,5 +1,6 @@
 let lostcondition = false;
 let wincondition = false;
+
 function mousePressed(){
     if(lostcondition || wincondition) return;
     if(!mouseBound(mouseX, mouseY)) return;
@@ -11,7 +12,7 @@ function mousePressed(){
     //change it's location
     Filled.push([gridpos.x, gridpos.y]);
     if(!obviousMove()) {
-        angelDepthFirst();
+        angelBreadthFirst();
     }
     calcCondition();
     redraw();

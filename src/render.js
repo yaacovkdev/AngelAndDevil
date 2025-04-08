@@ -1,10 +1,8 @@
 function setup(){
     var Canv;
-    sizeMode();
     initGrid();
     Canv = createCanvas(CANVSIZEX, CANVSIZEY);
     Canv.parent("canvdiv0");
-    Canv.style("display:block; position:absolute; left: 0; right: 0; margin: auto; ")
     background(240);
     smooth();
     
@@ -30,16 +28,16 @@ function draw(){
 
 function drawGrid(){
     push();
-    strokeWeight(gridinfo.size);
+    strokeWeight(gridinfo.linesize);
     stroke(color(60));
     
     //vertical lines
-    for(var i = 1; i < CANVSIZEX; i+= gridinfo.increment){
+    for(var i = 1; i < CANVSIZEX; i+= gridinfo.cellsize){
         line(i, 0, i, CANVSIZEX-1);
     }
     //line(CANVSIZEX-1, 0, CANVSIZEX, CANVSIZEX);
     //horiz lines
-    for(var i = 1; i < CANVSIZEY; i+= gridinfo.increment){
+    for(var i = 1; i < CANVSIZEY; i+= gridinfo.cellsize){
         line(0, i, CANVSIZEY-1, i);
     }
     pop();
@@ -51,9 +49,9 @@ function drawEnt(){
 
     //Angel
     fill(color('gold'));
-    var cx = (Angel.x * gridinfo.increment) + gridinfo.increment/2 +1;
-    var cy = (Angel.y * gridinfo.increment) + gridinfo.increment/2 +1;
-    circle(cx, cy, gridinfo.increment-2);
+    var cx = (Angel.x * gridinfo.cellsize) + gridinfo.cellsize/2 +1;
+    var cy = (Angel.y * gridinfo.cellsize) + gridinfo.cellsize/2 +1;
+    circle(cx, cy, gridinfo.cellsize-2);
 
     pop();
 }
@@ -63,8 +61,8 @@ function drawObs(){
     noStroke();
     fill(color('red'));
     for(var i in Filled){
-        rect(gridinfo.increment * Filled[i][0] , gridinfo.increment * Filled[i][1],
-         gridinfo.increment, gridinfo.increment);
+        rect(gridinfo.cellsize * Filled[i][0] , gridinfo.cellsize * Filled[i][1],
+         gridinfo.cellsize, gridinfo.cellsize);
     }
     pop();
 }
