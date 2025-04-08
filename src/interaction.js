@@ -10,7 +10,9 @@ function mousePressed(){
     
     //change it's location
     Filled.push([gridpos.x, gridpos.y]);
-    angelBreadthFirst();
+    if(!obviousMove()) {
+        angelDepthFirst();
+    }
     calcCondition();
     redraw();
 }

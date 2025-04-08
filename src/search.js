@@ -1,9 +1,21 @@
-
 let surround = [[-1,-1] ,[0, -1],[1,-1],
                 [-1,0]       ,[1,0],
                 [-1,1],[0,1],[1,1]];
 
 let surround_adjacent_index = [0,1,2,4,7,6,5,3];
+
+//find the next winning move for Angel
+function obviousMove() {
+    for (let i = 0; i < surround.length; i++) {
+        if((Angel.x + surround[i][0] == 0 || Angel.x + surround[i][0] == gridinfo.grids-1 ||
+            Angel.y + surround[i][1] == 0 || Angel.y + surround[i][1] == gridinfo.grids-1 ) && (isClear(Angel.x +surround[i][0], Angel.y + surround[i][1]))){
+            Angel.x += surround[i][0];
+            Angel.y += surround[i][1];
+            return true;
+        }
+    }
+    return false;
+}
 
 function randomAngelMove(){
     var i = int(Math.random() * 8);
@@ -25,8 +37,6 @@ function basicSearchMove(){
     var testgoal = [int(gridinfo.grids/2),0];
     var direction = [0,0];
 
-    
-
     direction = angelFindClosest(direction, testgoal);
     if(arrayEqual(direction, [0,0])){
         lostcondition = true;
@@ -40,7 +50,7 @@ function basicSearchMove(){
 function angelDepthFirst(){
 
     //grid matrix of unvisited cells
-    var Visited = [];
+    const Visited = [];
     for (var i = 0; i < gridinfo.grids; i++){
         var sub = [];
         for(var j = 0; j < gridinfo.grids; j++){
@@ -49,8 +59,7 @@ function angelDepthFirst(){
         Visited.push(sub);
     }
 
-    var stackMemo = [[Angel.x, Angel.y]];
-    
+    const stackMemo = [[Angel.x, Angel.y]];
 
     //the first direction
     var bestdirection = [0,0];
@@ -67,8 +76,7 @@ function angelDepthFirst(){
             //perimeter escape
             for(var i = 0; i < gridinfo.grids-1; i++){
                 if(arrayEqual(u, [i,0]) || arrayEqual(u, [i,gridinfo.grids-1]) 
-                || arrayEqual(u, [0,i]) || arrayEqual(u, [gridinfo.grids-1,i])){
-                    console.log('path found');
+                || arrayEqual(u, [0,i]) || arrayEqual(u, [gridinfo.grids-1,i])) {
                     loopbreak = true;
                     break;
                 }
@@ -143,7 +151,6 @@ function angelBreadthFirst(){
             for(var i = 0; i < gridinfo.grids-1; i++){
                 if(arrayEqual(u, [i,0]) || arrayEqual(u, [i,gridinfo.grids-1]) 
                 || arrayEqual(u, [0,i]) || arrayEqual(u, [gridinfo.grids-1,i])){
-                    console.log('path found');
                     loopbreak = true;
                     break;
                 }

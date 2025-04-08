@@ -2,7 +2,7 @@ function setup(){
     var Canv;
     sizeMode();
     initGrid();
-    Canv = createCanvas(CANVSIZEX, CANVSIZEY+MENU);
+    Canv = createCanvas(CANVSIZEX, CANVSIZEY);
     Canv.parent("canvdiv0");
     Canv.style("display:block; position:absolute; left: 0; right: 0; margin: auto; ")
     background(240);
@@ -11,7 +11,6 @@ function setup(){
     initAngel(AngelPosMode.middle);
     
     drawGrid();
-    angelBreadthFirst();
     drawEnt();
     noLoop();
 }
@@ -56,8 +55,6 @@ function drawEnt(){
     var cy = (Angel.y * gridinfo.increment) + gridinfo.increment/2 +1;
     circle(cx, cy, gridinfo.increment-2);
 
-
-    
     pop();
 }
 

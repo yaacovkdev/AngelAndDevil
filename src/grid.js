@@ -67,12 +67,12 @@ function initAngel(mode){
             Angel.gy = -int(gridinfo.grids/2);
             break;
         case AngelPosMode.middle:
-            Angel.x = int(gridinfo.grids/2 -1);
-            Angel.y = int(gridinfo.grids/2 -1);
+            Angel.x = int(gridinfo.grids/2);
+            Angel.y = int(gridinfo.grids/2);
             Angel.gx = 0;
             Angel.gy = 0;
-            Offset.x = -int(gridinfo.grids/2-1);
-            Offset.y = -int(gridinfo.grids/2-1);
+            Offset.x = -int(gridinfo.grids/2);
+            Offset.y = -int(gridinfo.grids/2);
             break;
     }
 }
