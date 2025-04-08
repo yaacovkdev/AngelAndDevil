@@ -1,23 +1,20 @@
 //default canvas size
-let CANVSIZEX = 800, CANVSIZEY = 800, MENU = 0, MINIMUM = 800;
+const CANVSIZEX = 800, CANVSIZEY = 800;
 
-let gridinfo = {
-    size: 2,
+const gridinfo = {
+    linesize: 2,
     grids: 21,
-    increment: 0,
+    cellsize: 0,
 };
 
-//CANVSIZEX and CANVSIZEY may have been altered during setup stage in render.js
+//init increment
 function initGrid(){
-    gridinfo.increment = int(CANVSIZEX/gridinfo.grids);
-    CANVSIZEX = gridinfo.increment * gridinfo.grids+gridinfo.size;
-    CANVSIZEY = gridinfo.increment * gridinfo.grids+gridinfo.size;
-    MENU = int(CANVSIZEY / 8);
+    gridinfo.cellsize = int(CANVSIZEX/gridinfo.grids);
 }
 
 function toPos(x, y){
-    x = int(x / gridinfo.increment);
-    y = int(y / gridinfo.increment);
+    x = int(x / gridinfo.cellsize);
+    y = int(y / gridinfo.cellsize);
     return {x,y};
 }
 
@@ -42,15 +39,6 @@ function inPerimiter(pos){
         }
     }
     return false;
-}
-
-function sizeMode(){
-    if(windowWidth < MINIMUM*1.25 || windowHeight < MINIMUM*1.25){
-        CANVSIZEX = MINIMUM, CANVSIZEY = MINIMUM;
-    } else {
-        CANVSIZEX = Math.min(windowWidth, windowHeight)-200;
-        CANVSIZEY = CANVSIZEX;
-    }
 }
 
 AngelPosMode = {
